@@ -7,6 +7,7 @@ class Cell:
         self.has_right_wall = True
         self.has_top_wall = True
         self.has_bottom_wall = True
+        self.visited = False
         self.__x1 = -1.0
         self.__x2 = -1.0
         self.__y1 = -1.0
@@ -18,22 +19,31 @@ class Cell:
         self.__x2 = x2
         self.__y1 = y1
         self.__y2 = y2
-        if self.has_left_wall:
+        if self.__win != None:
+            if self.has_left_wall:
+                fill_color = "black"
+            else:
+                fill_color = "white"
             left_wall = Line(Point(self.__x1, self.__y1), Point(self.__x1, self.__y2))
-            if self.__win != None:
-                self.__win.draw_line(left_wall)
-        if self.has_right_wall:
+            self.__win.draw_line(left_wall, fill_color)
+            if self.has_right_wall:
+                fill_color = "black"
+            else:
+                fill_color = "white"
             right_wall = Line(Point(self.__x2, self.__y1), Point(self.__x2, self.__y2))
-            if self.__win != None:
-                self.__win.draw_line(right_wall)
-        if self.has_top_wall:
+            self.__win.draw_line(right_wall, fill_color)
+            if self.has_top_wall:
+                fill_color = "black"
+            else:
+                fill_color = "white"
             top_wall = Line(Point(self.__x1, self.__y1), Point(self.__x2, self.__y1))
-            if self.__win != None:
-                self.__win.draw_line(top_wall)
-        if self.has_bottom_wall:
+            self.__win.draw_line(top_wall, fill_color)
+            if self.has_bottom_wall:
+                fill_color = "black"
+            else:
+                fill_color = "white"
             bottom_wall = Line(Point(self.__x1, self.__y2), Point(self.__x2, self.__y2))
-            if self.__win != None:
-                self.__win.draw_line(bottom_wall)
+            self.__win.draw_line(bottom_wall, fill_color)
 
     def draw_move(self, to_cell: "Cell", undo: bool = False) -> None:
         if undo:
